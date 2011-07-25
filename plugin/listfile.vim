@@ -72,6 +72,10 @@ endif
 if (!exists("g:listFile_mark"))
 	let g:listFile_mark = '-'
 endif
+" default due date format
+if (!exists("g:listFile_dateFormat"))
+	let g:listFile_dateFormat = '%y-%m-%d'
+endif
 
 """
 """ END CONFIGURABLE OPTIONS
@@ -457,15 +461,16 @@ endfunction "}}}
 " compile tag index
 fun! ListTagCompileIndex() "{{{
 	for line in getbufline('%',0,'$')
-		let matches = matchlist(line,':\([^\s:]\+\):')
-		if len(l:matches) > 0
-			call remove(l:matches,0)
-			for tagString in l:matches
-				if tagString != ''
-					let b:tags[tagString] = 'x'
-				endif
-			endfor
-		endif
+		let i = 1
+		while 1
+			let match = matchstr(line,':[^\t :]\+:',0,l:i)
+			if l:match == ''
+				break
+			endif
+			let match = substitute(l:match,':','','g')
+			let b:tags[l:match] = 'x'
+			let i = l:i + 1
+		endwhile
 	endfor
 endfunction "}}}
 " autocomplete function for tags
@@ -528,7 +533,7 @@ fun! ListDueR(linenum) "{{{
 endfunction "}}}
 " translate a string into the appropriate array of date strings
 fun! ListDateTranslate(date) "{{{
-	let dateFormat = '%y-%m-%d'
+	let dateFormat = g:listFile_dateFormat
 	let dates = []
 	if (a:date == '' || a:date == "today")
 		let dates = add(l:dates,strftime(l:dateFormat))
