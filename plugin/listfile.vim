@@ -6,6 +6,8 @@
 " Commands and shortcuts:
 "
 " CREATING
+" To get started:
+" :Lcreate <name> - create new list file with <name> (".list" is added automagically added)
 " ,n - create new item
 " <enter> - (insert or normal) create new item
 " ,s - create sub item
@@ -49,7 +51,6 @@
 " ,r - (normal) sort entire file
 "
 " ET CETERA
-" :Lcreate <name> - create new list file in current buffer with <name> (".list" is added automagically)
 " ,t - add/update last-modified timestamp on item
 
 """
