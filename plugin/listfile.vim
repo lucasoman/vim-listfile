@@ -223,9 +223,13 @@ fun! ListSearch(args) "{{{
 endfunction "}}}
 " create a new list file
 fun! ListCreate(name) "{{{
-	exe 'e '.a:name.'.list'
-	let @z = g:listFile_mark.' '
-	normal "zP
+	try
+		exe 'e '.a:name.'.list'
+		let @z = g:listFile_mark.' '
+		normal "zP
+	catch /^Vim\%((\a\+)\)\=:E37/
+		exe 'w '.a:name.'.list'
+	endtry
 endfunction "}}}
 " add/update timestamp only if option enabled
 fun! ListTimestampOptional() "{{{
