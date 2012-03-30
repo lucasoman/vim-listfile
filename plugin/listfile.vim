@@ -145,6 +145,11 @@ fun! ListFile() "{{{
 	nmap <buffer> ,3 :Lmark 3<CR>
 	nmap <buffer> ,4 :Lmark 4<CR>
 	nmap <buffer> ,5 :Lmark 5<CR>
+	vmap <buffer> ,1 :Lmark 1<CR>
+	vmap <buffer> ,2 :Lmark 2<CR>
+	vmap <buffer> ,3 :Lmark 3<CR>
+	vmap <buffer> ,4 :Lmark 4<CR>
+	vmap <buffer> ,5 :Lmark 5<CR>
 	" add/update [t]imestamp
 	nmap <buffer> ,t mz:call ListTimestamp()<CR>`z
 	vmap <buffer> ,r :call ListSortV()<CR>
