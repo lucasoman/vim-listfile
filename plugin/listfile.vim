@@ -113,6 +113,9 @@ fun! ListFile() "{{{
 	setl nowrap
 	setl tw=0
 
+	" sub-item tracking relies on lists using tabs
+	setl noexpandtab
+
 	" map all the magic shortcuts
 	" add [n]ew item below current
 	nmap <buffer> ,n :call ListNewItem(0)<CR>a
